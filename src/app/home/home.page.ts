@@ -41,6 +41,15 @@ getDetails(selectedArticle: any){
   }
   //Navigates to details page with all parameters
   this.router.navigate(['/details'],params);
-  
+
+
 }    
+favouritePage(){
+  this.router.navigate(['/favourites']);
+}
+
+readLaterPage(){
+  this.router.navigate(['/read-later']);
+}
+
 }

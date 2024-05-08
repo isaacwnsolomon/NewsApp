@@ -15,6 +15,14 @@ const routes: Routes = [
     path: 'details',
     loadChildren: () => import('./details/details.module').then( m => m.DetailsPageModule)
   },
+  {
+    path: 'favourites',
+    loadChildren: () => import('./favourites/favourites.module').then( m => m.FavouritesPageModule)
+  },
+  {
+    path: 'read-later',
+    loadChildren: () => import('./read-later/read-later.module').then( m => m.ReadLaterPageModule)
+  },
 ];
 
 @NgModule({
