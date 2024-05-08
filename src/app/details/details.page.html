@@ -1,9 +1,38 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>News By -</ion-title>
+    <ion-title>News By - {{source}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-
+<ion-content>
+  <div *ngIf="image" style="position:relative; object-fit: cover; height: 400px; margin: 5px; border-radius: 5px; background-position: center; background-repeat: none;" [style.background-image]="'linear-gradient(rgb(34 35 41 / 10%), rgb(34 35 41 / 90%)) ,url(' + image + ')'">
+  <h3 style="margin:15px; position: absolute; bottom:0; color: white;">{{author}}</h3>
+  </div>
+  <div style="margin: 16px;">
+    <ion-label style="margin:5px;" class="ion-text-wrap">{{title}}</ion-label>
+    <ion-item>
+      <ion-label>
+        <p>{{publishedAt | date}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label class="ion-text-wrap" style="font-weight: 300;">
+       {{description}}
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-item>
+        <ion-button fill="clear">
+          <ion-icon name="heart-outline"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear">
+          <ion-icon name="share-outline"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear">
+          <ion-icon name="bookmark-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-button fill="outline" colour="secondary" slot="end">Read More</ion-button>
+    </ion-item>
+  </div>
 </ion-content>

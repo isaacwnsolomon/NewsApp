@@ -27,7 +27,7 @@ export class DetailsPage implements OnInit {
     this.source = this.activatedRoute.snapshot.queryParamMap.get('source');
     this.title = this.activatedRoute.snapshot.queryParamMap.get('title');
     this.url = this.activatedRoute.snapshot.queryParamMap.get('url');
-    this.image = this.activatedRoute.snapshot.queryParamMap.get('urlImage');
+    this.image = this.activatedRoute.snapshot.queryParamMap.get('urlToImage');
+ 
   }
-
 }

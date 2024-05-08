@@ -24,7 +24,7 @@ export class HomePage {
 
 }
 getDetails(selectedArticle: any){
-  console.log(selectedArticle);
+  //console.log(selectedArticle);
   //creating naviagtion parameters
   const params : NavigationExtras={
     queryParams:{
@@ -35,7 +35,7 @@ getDetails(selectedArticle: any){
       source: selectedArticle.source.name ,
       title: selectedArticle.title,
       url: selectedArticle.url, 
-      urlToImage: selectedArticle.url, 
+      urlToImage: selectedArticle.urlToImage, 
 
     }
   }
