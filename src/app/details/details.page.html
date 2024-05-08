@@ -1,5 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-header [translucent]="true">
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="goHome()"><ion-icon name="arrow-back-outline"></ion-icon>Back</ion-button>
+        </ion-buttons>
+        <ion-title>News By - {{source}}</ion-title>
+      </ion-toolbar>
+    </ion-header>
     <ion-title>News By - {{source}}</ion-title>
   </ion-toolbar>
 </ion-header>

@@ -34,4 +34,8 @@ export class DetailsPage implements OnInit {
   readMore(url: string) {
     window.open(url, '_blank');
   }
+//Function to go back to home page
+  goHome(){
+    this.router.navigate(['/home']);
+  }
 }
