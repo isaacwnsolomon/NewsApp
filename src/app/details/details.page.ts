@@ -30,4 +30,8 @@ export class DetailsPage implements OnInit {
     this.image = this.activatedRoute.snapshot.queryParamMap.get('urlToImage');
  
   }
+  //Function which follows url to new tab when readmore is clicked
+  readMore(url: string) {
+    window.open(url, '_blank');
+  }
 }
