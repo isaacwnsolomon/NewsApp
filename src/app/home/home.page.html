@@ -13,8 +13,19 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-list>
+    <ion-row style="background-color: #99919132; border-radius: 16px;" class="ion-margin"
+    *ngFor="let articles of topHeadLines">
+      <ion-col size="4"> 
+        <img src="{{articles.urlToImage}}"  style="width:300px; height:100px; object-fit: cover; border-radius: 5px;"/>
+      </ion-col>
+      <ion-col size="8"> 
+        <ion-label>
+          {{articles.author}}
+          <p>{{articles.publishedAt}}</p>
+          <p style="font: weight 200px;">{{articles.title}}</p>
+        </ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-list>
 </ion-content>

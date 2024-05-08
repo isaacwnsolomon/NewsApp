@@ -13,14 +13,14 @@ export class NewsArticlesService {
   //Returns top head lines
   getTopHeadLines(): Observable<any>{
     return this.httpClient.get(
-      `${environment.url_base}top-headLines?country=ie&apiKey=${environment.api_key}`
+      `${environment.url_base}top-headLines?country=us&apiKey=${environment.api_key}`
     )
   }
 
  //Returns news categories
- getArticlesByCategory():Observable<any>{
+ getArticlesByCategory(category: string):Observable<any>{
   return this.httpClient.get(
-    `${environment.url_base}top-headlines?country=de&category=business&apiKey=${environment.api_key}`
+    `${environment.url_base}top-headlines?country=us&${category}=health&apiKey=${environment.api_key}`
   )
 }
 }
