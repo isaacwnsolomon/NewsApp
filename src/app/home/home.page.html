@@ -19,8 +19,8 @@
       <ion-col size="4"> 
         <img src="{{articles.urlToImage}}"  style="width:300px; height:100px; object-fit: cover; border-radius: 5px;"/>
       </ion-col>
-      <ion-col size="8"> 
-        <ion-label>
+      <ion-col size="8" > 
+        <ion-label (click)="getDetails(articles)">
           {{articles.author}}
           <p>{{articles.publishedAt | date}}</p>
           <p style="font: weight 200px;">{{articles.title}}</p>
