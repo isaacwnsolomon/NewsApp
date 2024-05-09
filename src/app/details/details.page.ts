@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-//Importing favourite service
+//Importing favourite service and read later
 import { favouritesService } from '../favouriteService/favourite-articles.service';
+import { ReadLaterService } from '../readLaterService/read-later-articles.service';
 @Component({
   selector: 'app-details',
   templateUrl: './details.page.html',
@@ -17,7 +18,7 @@ export class DetailsPage implements OnInit {
   source:any;
   title:any;
 //Injecting
-constructor(private router:Router, private activatedRoute:ActivatedRoute,private favouritesService: favouritesService) {}
+constructor(private router:Router, private activatedRoute:ActivatedRoute,private favouritesService: favouritesService, private readLaterService: ReadLaterService) {}
 //Runs immediatly as page is initiated
   ngOnInit() {
     this.author = this.activatedRoute.snapshot.queryParamMap.get('author');
@@ -50,7 +51,20 @@ constructor(private router:Router, private activatedRoute:ActivatedRoute,private
       url: this.url,
       urlToImage: this.image
     }
-    this.favouritesService.addToFavourites(article); // changed to match with service
+    this.favouritesService.addToFavourites(article); 
+  }
+  addToReadLater() {
+    let article = {
+      author: this.author,
+      content: this.content,
+      description: this.description,
+      publishedAt: this.publishedAt,
+      source: this.source,
+      title: this.title,
+      url: this.url,
+      urlToImage: this.image
+    }
+    this.readLaterService.addToReadLater(article); 
   }
 }
 

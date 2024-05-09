@@ -1,13 +1,26 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>readLater</ion-title>
-  </ion-toolbar>
-</ion-header>
+
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">readLater</ion-title>
+      <ion-buttons slot="start">
+        <ion-button (click)="goHome()"><ion-icon name="arrow-back-outline"></ion-icon>Back</ion-button>
+      </ion-buttons>
+      <ion-title size="large">Read Later</ion-title>
     </ion-toolbar>
   </ion-header>
+  
+  <ion-list>
+    <ion-item *ngFor="let read of laterRead">
+      
+      <ion-label (click)="getDetails(read)">
+        <img src="{{read.urlToImage}}"  style="width:300px; height:100px; object-fit: cover; border-radius: 5px;"/>
+        <h2>{{ read.title }}</h2>
+       
+        <p>{{ read.description }}</p>
+      </ion-label>
+      <ion-button fill="outline" slot="end" (click)="readMore(read.url)">Read More</ion-button>
+    </ion-item>
+  </ion-list>
+
 </ion-content>
