@@ -36,4 +36,7 @@ export class FavouritesPage implements OnInit {
       }
 }
 this.router.navigate(['/details'], params);
+  }
+  goHome(){
+    this.router.navigate(['/home']);
   }}
