@@ -18,9 +18,9 @@ export class NewsArticlesService {
   }
 
  //Returns news categories
- getArticlesByCategory(category: string):Observable<any>{
+ getArticlesByCategory(category: string): Observable<any> {
   return this.httpClient.get(
-    `${environment.url_base}top-headlines?country=us&${category}=health&apiKey=${environment.api_key}`
+    `${environment.url_base}top-headlines?country=us&category=${category}&apiKey=${environment.api_key}`
   )
 }
 }

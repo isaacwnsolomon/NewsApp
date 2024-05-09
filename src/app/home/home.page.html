@@ -9,8 +9,30 @@
     <ion-title>
       The News
     </ion-title>
+    <ion-segment scrollable (ionChange)="($event.detail && $event.detail.value) ? loadCategoryArticles($event.detail.value.toString()) : ''">
+      <ion-segment-button *ngFor="let category of categories" value="{{category}}">
+        {{ category }}
+      </ion-segment-button>
+    </ion-segment>
   </ion-toolbar>
 </ion-header>
+
+  <!-- Category Articles List -->
+  <h2>Articles by Category</h2>
+  <ion-list>
+    <ion-item *ngFor="let categoryArticle of articles">
+      <ion-avatar slot="start">
+        <img [src]="categoryArticle.urlToImage"/>
+      </ion-avatar>
+      
+      <ion-label (click)="getDetails(categoryArticle)">
+
+        <h2>{{ categoryArticle.title }}</h2>
+        <p>{{ categoryArticle.description }}</p>
+        <p>{{ categoryArticle.author }} - {{ categoryArticle.publishedAt | date }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">

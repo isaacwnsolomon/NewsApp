@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NewsArticlesService } from '../api/news-articles.service';
 import { NavigationExtras, Router } from '@angular/router';
 
@@ -7,49 +7,55 @@ import { NavigationExtras, Router } from '@angular/router';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
-   // Default selected category
-  selectedCategory = 'health';
-   // Array to store top headlines
-  topHeadLines: any= [];
-   
-  constructor(private articleService:NewsArticlesService, private router:Router) {
-    // Gets top headlines when the component is initialized
-    articleService.getTopHeadLines().subscribe((results)=>{
-     // Push the retrieved top headlines into the topHeadLines array
-      this.topHeadLines.push(...results.articles);
-        // Log the retrieved articles to the console
-      console.log(results.articles);
-    })
+export class HomePage implements OnInit {
+  topHeadLines: any[] = [];
+  categories: string[] = ['business', 'entertainment', 'general', 'health', 'science', 'sports', 'technology'];
+  articles: any[] = []; // we will store our category articles here
+slideOpts = {
+  initialSlide: 0,
+  speed: 400
+};
 
-}
-getDetails(selectedArticle: any){
-  //console.log(selectedArticle);
-  //creating naviagtion parameters
-  const params : NavigationExtras={
-    queryParams:{
-      author: selectedArticle.author ,
-      content: selectedArticle.content,
-      description: selectedArticle.description ,
-      publishedAt: selectedArticle.publishedAt,
-      source: selectedArticle.source.name ,
-      title: selectedArticle.title,
-      url: selectedArticle.url, 
-      urlToImage: selectedArticle.urlToImage, 
+  constructor(private articleService: NewsArticlesService, private router: Router) {}
 
-    }
+  ngOnInit() {
+    this.articleService.getTopHeadLines().subscribe((results) => {
+      this.topHeadLines = results.articles;
+    });
+
+    // Optional: to load category articles for the first category upon page load
+    this.loadCategoryArticles(this.categories[0]);
   }
-  //Navigates to details page with all parameters
-  this.router.navigate(['/details'],params);
+
+  loadCategoryArticles(category: string) {
+    this.articleService.getArticlesByCategory(category)   
+      .subscribe(response => {
+        this.articles = response.articles;
+      });
+  }
 
 
-}    
-favouritePage(){
-  this.router.navigate(['/favourites']);
-}
+  getDetails(selectedArticle: any) {
+    const params : NavigationExtras = {
+      queryParams:{
+        author: selectedArticle.author ,
+        content: selectedArticle.content,
+        description: selectedArticle.description ,
+        publishedAt: selectedArticle.publishedAt,
+        source: selectedArticle.source.name ,
+        title: selectedArticle.title,
+        url: selectedArticle.url, 
+        urlToImage: selectedArticle.urlToImage, 
+      }
+    }
+    this.router.navigate(['/details'], params);
+  }
 
-readLaterPage(){
-  this.router.navigate(['/read-later']);
-}
+  favouritePage() {
+    this.router.navigate(['/favourites']);
+  }
 
+  readLaterPage() {
+    this.router.navigate(['/read-later']);
+  }
 }
