@@ -13,7 +13,7 @@
   
   <ion-list>
     <ion-item *ngFor="let fav of favourites">
-      <ion-label>
+      <ion-label (click)="getDetails(fav)">
         <h2>{{ fav.title }}</h2>
         <p>{{ fav.description }}</p>
       </ion-label>
