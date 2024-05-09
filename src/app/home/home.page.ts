@@ -26,8 +26,9 @@ slideOpts = {
     // Optional: to load category articles for the first category upon page load
     this.loadCategoryArticles(this.categories[0]);
   }
-
+  selectedCategory: string = '';
   loadCategoryArticles(category: string) {
+    this.selectedCategory = category;
     this.articleService.getArticlesByCategory(category)   
       .subscribe(response => {
         this.articles = response.articles;

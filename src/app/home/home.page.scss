@@ -27,7 +27,7 @@
 }
 //Making cateogry list scroll horizontal
 
-
+/*
 ion-scroll {
   display: flex;
   overflow-x: scroll;
@@ -41,4 +41,21 @@ ion-scroll ion-card {
   flex: 0 0 auto;
   width: auto;
   height: 100%;
+}*/
+.scroller {
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 10px;
+  width: 100%;
 }
+
+.scroller ion-card {
+  display: inline-block;
+}
+
+.scroller ion-card {
+  display: inline-block;
+  width: 270px; 
+  height: 280px; 
+}
+

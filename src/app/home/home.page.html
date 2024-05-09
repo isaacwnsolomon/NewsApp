@@ -7,7 +7,7 @@
       <ion-icon name="bookmark-outline" (click)="readLaterPage()"></ion-icon>
     </ion-button>
     <ion-title>
-      The News
+      
     </ion-title>
     <ion-segment scrollable (ionChange)="($event.detail && $event.detail.value) ? loadCategoryArticles($event.detail.value.toString()) : ''">
       <ion-segment-button *ngFor="let category of categories" value="{{category}}">
@@ -18,21 +18,20 @@
 </ion-header>
 
   <!-- Category Articles List -->
-  <h2>Articles by Category</h2>
-  <ion-list>
-    <ion-item *ngFor="let categoryArticle of articles">
-      <ion-avatar slot="start">
-        <img [src]="categoryArticle.urlToImage"/>
-      </ion-avatar>
-      
-      <ion-label (click)="getDetails(categoryArticle)">
-
-        <h2>{{ categoryArticle.title }}</h2>
-        <p>{{ categoryArticle.description }}</p>
-        <p>{{ categoryArticle.author }} - {{ categoryArticle.publishedAt | date }}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <div class="scroller">
+    <ion-card *ngFor="let categoryArticle of articles" (click)="getDetails(categoryArticle)" style="background-color: #8292be32; " class="ion-margin">
+      <ion-card-content>
+      <ion-col size="4">
+          <img [src]="categoryArticle.urlToImage"style="width:300px; height:150px; object-fit: cover; border-radius: 5px;" />
+        </ion-col>
+        <ion-col size="8">
+        <ion-label (click)="getDetails(articles)">
+          <p style="font: weight 200px;">{{categoryArticle.title}}</p>
+        </ion-label>
+      </ion-col>
+      </ion-card-content>
+    </ion-card>
+  </div>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
