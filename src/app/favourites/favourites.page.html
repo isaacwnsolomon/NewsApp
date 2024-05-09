@@ -10,4 +10,15 @@
       <ion-title size="large">favourites</ion-title>
     </ion-toolbar>
   </ion-header>
+  
+  <ion-list>
+    <ion-item *ngFor="let fav of favourites">
+      <ion-label>
+        <h2>{{ fav.title }}</h2>
+        <p>{{ fav.description }}</p>
+      </ion-label>
+      <ion-button fill="outline" slot="end" (click)="readMore(fav.url)">Read More</ion-button>
+    </ion-item>
+  </ion-list>
+
 </ion-content>

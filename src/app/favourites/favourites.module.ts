@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
-import { FavouritesPageRoutingModule } from './favourites-routing.module';
+import { RouterModule } from '@angular/router';
 
 import { FavouritesPage } from './favourites.page';
 
@@ -13,8 +11,13 @@ import { FavouritesPage } from './favourites.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    FavouritesPageRoutingModule
+    RouterModule.forChild([
+      {
+        path: '',
+        component: FavouritesPage
+      }
+    ])
   ],
   declarations: [FavouritesPage]
 })
-export class FavouritesPageModule {}
+export class FavouritesPageModule { }

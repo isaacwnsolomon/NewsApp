@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
+//Importing favourite service
+import { favouritesService } from '../favouriteService/favourite-articles.service';
 @Component({
   selector: 'app-details',
   templateUrl: './details.page.html',
@@ -15,9 +16,8 @@ export class DetailsPage implements OnInit {
   image: any;
   source:any;
   title:any;
-  constructor(private router:Router, private activatedRoute:ActivatedRoute) {
-    
-   }
+//Injecting
+constructor(private router:Router, private activatedRoute:ActivatedRoute,private favouritesService: favouritesService) {}
 //Runs immediatly as page is initiated
   ngOnInit() {
     this.author = this.activatedRoute.snapshot.queryParamMap.get('author');
@@ -38,4 +38,19 @@ export class DetailsPage implements OnInit {
   goHome(){
     this.router.navigate(['/home']);
   }
+  //Adds details to favourites page when heart is clicked 
+  addToFavourites() {
+    let article = {
+      author: this.author,
+      content: this.content,
+      description: this.description,
+      publishedAt: this.publishedAt,
+      source: this.source,
+      title: this.title,
+      url: this.url,
+      urlToImage: this.image
+    }
+    this.favouritesService.addToFavourites(article); // changed to match with service
+  }
 }
+
