@@ -3,8 +3,10 @@
     <ion-header [translucent]="true">
       <ion-toolbar>
         <ion-buttons slot="start">
+            <!-- Navigation button to go to home page -->
           <ion-button (click)="goHome()"><ion-icon name="arrow-back-outline"></ion-icon>Back</ion-button>
         </ion-buttons>
+        <!-- Title displaying source of news -->
         <ion-title>News By - {{source}}</ion-title>
       </ion-toolbar>
     </ion-header>
@@ -13,6 +15,7 @@
 </ion-header>
 
 <ion-content>
+  <!-- Dynamic background image with overlay effect if image exists -->
   <div *ngIf="image" style="position:relative; object-fit: cover; height: 400px; margin: 5px; border-radius: 5px; background-position: center; background-repeat: none;" [style.background-image]="'linear-gradient(rgb(34 35 41 / 10%), rgb(34 35 41 / 90%)) ,url(' + image + ')'">
   <h3 style="margin:15px; position: absolute; bottom:0; color: white;">{{author}}</h3>
   </div>
@@ -30,6 +33,7 @@
     </ion-item>
     <ion-item>
       <ion-item>
+          <!-- Buttons for adding to favourites and reading later and to read more-->
         <ion-button fill="clear" (click)="addToFavourites()">
           <ion-icon name="heart-outline"></ion-icon>
         </ion-button>

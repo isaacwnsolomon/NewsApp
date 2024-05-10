@@ -17,26 +17,26 @@ long: String = "";
   favourites: any[] = [];
   topHeadLines: any[] = [];
   categories: string[] = ['business', 'entertainment', 'general', 'health', 'science', 'sports', 'technology'];
-  articles: any[] = []; // we will store our category articles here
-  slideOpts = {
-    initialSlide: 0,
-    speed: 400
-  };
+  // we will store our category articles here
+  articles: any[] = []; 
+  
 
   constructor(private articleService: NewsArticlesService, private router: Router, private storage:Storage)
 {
   this.storage.create().then(() => {
+    //Loads favourites after created
       this.loadFavourites();
   });
 }
 
   async ngOnInit() {
+    //Loads the top headlines on initialisation 
     this.articleService.getTopHeadLines().subscribe((results) => {
       this.topHeadLines = results.articles;
     });
 
-    // Optional: to load category articles for the first category upon page load
-    this.loadCategoryArticles(this.categories[0]);
+    // Loads default category
+    this.loadCategoryArticles(this.categories[4]);
 
     //Initialises storage
     await this.storage.create();
@@ -46,11 +46,13 @@ long: String = "";
   }
   
   async loadFavourites() {
+    //Gets favourites from storage or sets array to empty if doesnt exist
     this.favourites = await this.storage.get('favourites') || [];
   }
 
   selectedCategory: string = '';
   loadCategoryArticles(category: string) {
+    //Loads articles based on selected category
     this.selectedCategory = category;
     this.articleService.getArticlesByCategory(category)   
       .subscribe(response => {
@@ -60,6 +62,7 @@ long: String = "";
 
 
   getDetails(selectedArticle: any) {
+    //Navigation details to pass to details page 
     const params : NavigationExtras = {
       queryParams:{
         author: selectedArticle.author ,
@@ -75,21 +78,29 @@ long: String = "";
     this.router.navigate(['/details'], params);
   }
 
+  //Function to navigate to favourites page 
   favouritePage() {
     this.router.navigate(['/favourites']);
   }
-
+//Function to navigate to readLater page 
   readLaterPage() {
     this.router.navigate(['/read-later']);
   }
+  //Function to navigate to setting page 
+  settingsPage() {
+    this.router.navigate(['/settings']);
+  }
   async saveToFavourites(article: any) {
+    //Create storage if not already created
     await this.storage.create();
     let favourites = await this.storage.get('favourites');
     // If no array in storage
     if (!favourites) {
       favourites = [];  
     } 
+    //add new article to favourite array
     favourites.push(article);
+    //save updated favourites to storage 
     this.storage.set('favourites', favourites).then(() => {  
       console.log('Article saved to favourites');
     }).catch((error) => {
@@ -97,11 +108,7 @@ long: String = "";
     });
     
   }
-  async getGPS() {
-    this.coordinates = await Geolocation.getCurrentPosition();
-    this.lat = this.coordinates.coords.latitude;
-    this.long = this.coordinates.coords.longitude;
-    }
+  //Opens wiki url on github to show users how to use the app 
     async openBrowser() {
       await Browser.open({ url: 'https://github.com/isaacwnsolomon/NewsApp/wiki'
       });

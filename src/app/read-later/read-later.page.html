@@ -4,6 +4,7 @@
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-buttons slot="start">
+        <!-- Button to go back home with  arrow icon -->
         <ion-button (click)="goHome()"><ion-icon name="arrow-back-outline"></ion-icon>Back</ion-button>
       </ion-buttons>
       <ion-title size="large">Read Later</ion-title>
@@ -11,16 +12,19 @@
   </ion-header>
   
   <ion-list>
+      <!-- Repeats for each entry in the laterRead array -->
     <ion-item *ngFor="let read of laterRead">
-      
+         <!-- Clickable label to show article details -->
       <ion-label (click)="getDetails(read)">
         <img src="{{read.urlToImage}}"  style="width:300px; height:100px; object-fit: cover; border-radius: 5px;"/>
         <h2>{{ read.title }}</h2>
        
         <p>{{ read.description }}</p>
       </ion-label>
+       <!-- Button for reading more about the article -->
       <ion-button fill="outline" slot="end" (click)="readMore(read.url)">Read More</ion-button>
       <ion-buttons slot="start" (click)="removeArticle(read)">
+         <!-- Button for deleting the article -->
         <ion-buttons (click)="removeArticle(read)"><ion-icon name="trash-outline"></ion-icon></ion-buttons>
       </ion-buttons>
     </ion-item>

@@ -7,12 +7,14 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class NewsArticlesService {
-
+//Injects HttpClient to allow http requests
   constructor(private httpClient:HttpClient) { 
   }
   //Returns top head lines
   getTopHeadLines(): Observable<any>{
     return this.httpClient.get(
+        // Constructs the URL for the API request using the base URL and API key stored in environment variables.
+      // Filters top headlines for the US.
       `${environment.url_base}top-headLines?country=us&apiKey=${environment.api_key}`
     )
   }

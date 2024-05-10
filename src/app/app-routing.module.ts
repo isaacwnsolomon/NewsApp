@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'read-later',
     loadChildren: () => import('./read-later/read-later.module').then( m => m.ReadLaterPageModule)
   },
+  {
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
+  },
 ];
 
 @NgModule({

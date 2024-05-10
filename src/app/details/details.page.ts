@@ -9,6 +9,7 @@ import { ReadLaterService } from '../readLaterService/read-later-articles.servic
   styleUrls: ['./details.page.scss'],
 })
 export class DetailsPage implements OnInit {
+  //variables to hold details of articles 
   author: any;
   content: any;
   description: any;
@@ -19,7 +20,7 @@ export class DetailsPage implements OnInit {
   title:any;
 //Injecting
 constructor(private router:Router, private activatedRoute:ActivatedRoute,private favouritesService: favouritesService, private readLaterService: ReadLaterService) {}
-//Runs immediatly as page is initiated
+//Runs immediatly as page is initiated, gets article details from route parameters 
   ngOnInit() {
     this.author = this.activatedRoute.snapshot.queryParamMap.get('author');
     this.content = this.activatedRoute.snapshot.queryParamMap.get('content');
@@ -53,6 +54,7 @@ constructor(private router:Router, private activatedRoute:ActivatedRoute,private
     }
     this.favouritesService.addToFavourites(article); 
   }
+  //Adds current article to read later page 
   addToReadLater() {
     let article = {
       author: this.author,
