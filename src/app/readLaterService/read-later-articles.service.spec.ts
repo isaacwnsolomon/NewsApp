@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ReadLaterArticlesService } from './read-later-articles.service';
+import { ReadLaterService } from './read-later-articles.service';
 
 describe('ReadLaterArticlesService', () => {
-  let service: ReadLaterArticlesService;
+  let service: ReadLaterService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ReadLaterArticlesService);
+    service = TestBed.inject(ReadLaterService);
   });
 
   it('should be created', () => {

@@ -6,15 +6,21 @@
     <ion-button fill="clear" (click)="readLaterPage()">
       <ion-icon name="bookmark-outline" (click)="readLaterPage()"></ion-icon>
     </ion-button>
+    <ion-button fill="clear" (click)="getGPS()">
+      <ion-icon name="location-outline" (click)="getGPS()"></ion-icon>
+    </ion-button>
+    <ion-button fill="clear"(click)="openBrowser()">Need Help?
+    </ion-button>
     <ion-title>
       
     </ion-title>
-    <ion-segment scrollable (ionChange)="($event.detail && $event.detail.value) ? loadCategoryArticles($event.detail.value.toString()) : ''">
-      <ion-segment-button *ngFor="let category of categories" value="{{category}}">
-        {{ category }}
-      </ion-segment-button>
-    </ion-segment>
+    
   </ion-toolbar>
+  <ion-segment scrollable (ionChange)="($event.detail && $event.detail.value) ? loadCategoryArticles($event.detail.value.toString()) : ''">
+    <ion-segment-button *ngFor="let category of categories" value="{{category}}">
+      {{ category }}
+    </ion-segment-button>
+  </ion-segment>
 </ion-header>
 
   <!-- Category Articles List -->

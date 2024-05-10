@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NewsArticlesService } from '../api/news-articles.service';
 import { NavigationExtras, Router } from '@angular/router';
+import { Storage } from "@ionic/storage-angular";
+import { Geolocation } from '@capacitor/geolocation';
+import { Browser } from '@capacitor/browser';
 
 @Component({
   selector: 'app-home',
@@ -8,24 +11,44 @@ import { NavigationExtras, Router } from '@angular/router';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+  coordinates: any = "";
+lat: string = "";
+long: String = "";
+  favourites: any[] = [];
   topHeadLines: any[] = [];
   categories: string[] = ['business', 'entertainment', 'general', 'health', 'science', 'sports', 'technology'];
   articles: any[] = []; // we will store our category articles here
-slideOpts = {
-  initialSlide: 0,
-  speed: 400
-};
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400
+  };
 
-  constructor(private articleService: NewsArticlesService, private router: Router) {}
+  constructor(private articleService: NewsArticlesService, private router: Router, private storage:Storage)
+{
+  this.storage.create().then(() => {
+      this.loadFavourites();
+  });
+}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.articleService.getTopHeadLines().subscribe((results) => {
       this.topHeadLines = results.articles;
     });
 
     // Optional: to load category articles for the first category upon page load
     this.loadCategoryArticles(this.categories[0]);
+
+    //Initialises storage
+    await this.storage.create();
+
+    // Load favourites
+    this.loadFavourites();
   }
+  
+  async loadFavourites() {
+    this.favourites = await this.storage.get('favourites') || [];
+  }
+
   selectedCategory: string = '';
   loadCategoryArticles(category: string) {
     this.selectedCategory = category;
@@ -59,4 +82,29 @@ slideOpts = {
   readLaterPage() {
     this.router.navigate(['/read-later']);
   }
+  async saveToFavourites(article: any) {
+    await this.storage.create();
+    let favourites = await this.storage.get('favourites');
+    // If no array in storage
+    if (!favourites) {
+      favourites = [];  
+    } 
+    favourites.push(article);
+    this.storage.set('favourites', favourites).then(() => {  
+      console.log('Article saved to favourites');
+    }).catch((error) => {
+      console.log('Storing error: ', error);
+    });
+    
+  }
+  async getGPS() {
+    this.coordinates = await Geolocation.getCurrentPosition();
+    this.lat = this.coordinates.coords.latitude;
+    this.long = this.coordinates.coords.longitude;
+    }
+    async openBrowser() {
+      await Browser.open({ url: 'https://github.com/isaacwnsolomon/NewsApp/wiki'
+      });
+      };
+      
 }
