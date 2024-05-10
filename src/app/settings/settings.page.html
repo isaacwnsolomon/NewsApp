@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button (click)="goHome()" fill="clear"><ion-icon name="arrow-back-outline"></ion-icon>Back</ion-button>
+ 
+    <ion-title>Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      Background Color
+    
+    </ion-list-header>
+       <!-- Radio buttons allowing selection of background color  -->
+    <ion-radio-group [(ngModel)]="selectedColour" (ionChange)="changeSetting('backgroundColor', selectedColour)">
+      <ion-item>
+        <!-- Label displaying default option  -->
+        <ion-label>Default</ion-label>
+        <ion-radio slot="start" value="default"></ion-radio>
+      </ion-item>
+      <ion-item>
+         <!-- List option for light and dark background option -->
+        <ion-label>Light</ion-label>
+        <ion-radio slot="start" value="light"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Dark</ion-label>
+        <ion-radio slot="start" value="dark"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+
+    <ion-list-header>
+      Font Size
+    </ion-list-header>
+    <ion-radio-group [(ngModel)]="selectedFontSize" (ionChange)="changeSetting('fontSize', selectedFontSize)">
+      <ion-item>
+         <!-- Radio group for choosing the font size -->
+        <ion-label>Small</ion-label>
+        <ion-radio slot="start" value="small"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Medium</ion-label>
+        <ion-radio slot="start" value="medium"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Large</ion-label>
+        <ion-radio slot="start" value="large"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+</ion-content>
