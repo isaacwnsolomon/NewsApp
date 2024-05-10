@@ -4,7 +4,7 @@ import { NavigationExtras, Router } from "@angular/router";
 
 @Component({
   selector: 'app-read-later',
-  templateUrl: './read-later.page.html',    
+  templateUrl: './read-later.page.html',
   styleUrls: ['./read-later.page.scss'],
 })
 
@@ -14,8 +14,18 @@ export class ReadLaterPage implements OnInit {
   
   constructor(private readLaterService: ReadLaterService, private router: Router) {}
 
+  
   ngOnInit() {
+    this.loadReadLaterArticles();
+  }
+
+  loadReadLaterArticles() {
     this.laterRead = this.readLaterService.getReadLater();
+  }
+
+  removeArticle(article: any) {
+    this.readLaterService.removeFromReadLater(article);
+    this.loadReadLaterArticles(); 
   }
 
   readMore(url: string) {

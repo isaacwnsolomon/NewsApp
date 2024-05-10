@@ -20,6 +20,9 @@
         <p>{{ read.description }}</p>
       </ion-label>
       <ion-button fill="outline" slot="end" (click)="readMore(read.url)">Read More</ion-button>
+      <ion-buttons slot="start" (click)="removeArticle(read)">
+        <ion-buttons (click)="removeArticle(read)"><ion-icon name="trash-outline"></ion-icon></ion-buttons>
+      </ion-buttons>
     </ion-item>
   </ion-list>
 
