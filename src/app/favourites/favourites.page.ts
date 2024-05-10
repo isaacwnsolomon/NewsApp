@@ -1,6 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import { favouritesService } from '../favouriteService/favourite-articles.service';
-import { NavigationExtras, Router } from "@angular/router";
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-favourites',
@@ -8,22 +8,21 @@ import { NavigationExtras, Router } from "@angular/router";
   styleUrls: ['./favourites.page.scss'],
 })
 export class FavouritesPage implements OnInit {
-
   favourites: any[] = [];
-  
-  constructor(private favouritesService: favouritesService,private router: Router) {}
+
+  constructor(private favouritesService: favouritesService, private router: Router) {}
 
   ngOnInit() {
+    this.loadFavourites();
+  }
+
+  loadFavourites() {
     this.favourites = this.favouritesService.getFavourites();
   }
-  readMore(url: string) {
-    window.open(url, '_blank');
-  }
-  getDetails(selectedArticle: any){
-    //console.log(selectedArticle);
-    //creating naviagtion parameters
-    const params : NavigationExtras={
-      queryParams:{
+
+  getDetails(selectedArticle: any) {
+    const params: NavigationExtras = {
+      queryParams: {
         author: selectedArticle.author ,
         content: selectedArticle.content,
         description: selectedArticle.description ,
@@ -34,9 +33,13 @@ export class FavouritesPage implements OnInit {
         urlToImage: selectedArticle.urlToImage, 
   
       }
-}
+};
 this.router.navigate(['/details'], params);
   }
   goHome(){
     this.router.navigate(['/home']);
-  }}
+  }
+  readMore(url: string) {
+    window.open(url, '_blank');
+  }
+}
