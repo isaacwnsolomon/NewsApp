@@ -28,4 +28,8 @@ export class favouritesService {
   async saveFavourites() {
     await this.storage.set('favourites', this.favourites);
   }
+  removeFromFavourites(article: any) {
+    this.favourites = this.favourites.filter(fav => fav.url !== article.url); 
+    this.saveFavourites();
+  }
 }

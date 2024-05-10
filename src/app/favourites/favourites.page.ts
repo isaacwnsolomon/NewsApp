@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { favouritesService } from '../favouriteService/favourite-articles.service';
 import { NavigationExtras, Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-favourites',
   templateUrl: './favourites.page.html',
@@ -41,5 +42,10 @@ this.router.navigate(['/details'], params);
   }
   readMore(url: string) {
     window.open(url, '_blank');
+  }
+  removeArticle(article: any) {
+    this.favouritesService.removeFromFavourites(article);
+    // Refresh the list after deletion
+    this.loadFavourites(); 
   }
 }

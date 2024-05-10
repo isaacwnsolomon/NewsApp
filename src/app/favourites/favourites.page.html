@@ -14,12 +14,16 @@
     <ion-item *ngFor="let fav of favourites">
       
       <ion-label (click)="getDetails(fav)">
+      
         <img src="{{fav.urlToImage}}"  style="width:300px; height:100px; object-fit: cover; border-radius: 5px;"/>
         <h2>{{ fav.title }}</h2>
        
         <p>{{ fav.description }}</p>
       </ion-label>
       <ion-button fill="outline" slot="end" (click)="readMore(fav.url)">Read More</ion-button>
+      <ion-buttons slot="start" (click)="removeArticle(fav)">
+        <ion-buttons (click)="removeArticle(fav)"><ion-icon name="trash-outline"></ion-icon></ion-buttons>
+      </ion-buttons>
     </ion-item>
   </ion-list>
 
